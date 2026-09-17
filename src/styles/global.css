@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    font-family: arial, sans-serif;
+    background-color: #f5f7fa ;
+    color: #222;
+}
+
+#root{
+    min-height: 100vh;
+}

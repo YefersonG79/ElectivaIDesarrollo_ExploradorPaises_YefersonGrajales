@@ -10,5 +10,7 @@ export async function getCountries(signal?: AbortSignal): Promise<Country[]> {
     throw new Error(`Error al obtener los países: ${response.status}`)
   }
 
-  return response.json()
+  const data = (await response.json()) as Country[]
+
+  return data
 }
