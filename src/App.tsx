@@ -7,7 +7,7 @@ import { BarraBusqueda } from './components/BarraBusqueda'
 import { DetallePais } from './components/DetallePais'
 import { ContadorFavoritos } from './components/contadorFavoritos'
 
-function App() {
+export function App() {
   const [countries, setCountries] = useState<Country[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -17,7 +17,6 @@ function App() {
   const [retryCount, setRetryCount] = useState(0)
   const [favoriteCodes, setFavoriteCodes] = useState<string[]>(() => {
     const stored = localStorage.getItem('favoriteCodes')
-
     if (!stored) {
       return []
     }
@@ -50,7 +49,6 @@ function App() {
 
   useEffect(() => {
     const controller = new AbortController()
-
     getCountries(controller.signal)
       .then((data) => {
         setCountries(data)
@@ -59,7 +57,6 @@ function App() {
         if (controller.signal.aborted) {
           return
         }
-
         if (err instanceof Error) {
           setError(err.message)
         } else {
@@ -148,7 +145,3 @@ function App() {
     </>
   )
 }
-
-
-
-export default App;

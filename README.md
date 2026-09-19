@@ -117,7 +117,7 @@ npm run preview
 src/
 ├── components/
 │   ├── BarraBusqueda.tsx
-│   ├── ContadorFavoritos (contadorFavoritos.tsx)
+│   ├── contadorFavoritos.tsx
 │   ├── DetallePais.tsx
 │   ├── EstadoMensajes.tsx
 │   ├── ListaPaises.tsx
