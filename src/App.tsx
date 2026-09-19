@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import type { Country } from './types/api'
-import {getCountries} from './services/api'
+import { getCountries } from './services/api'
 import { ListaPaises } from './components/ListaPaises'
+import { EstadoMensajes } from './components/EstadoMensajes'
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([])
@@ -17,7 +18,7 @@ function App() {
       })
       .catch((err: unknown) => {
         if (err instanceof DOMException && err.name === 'AbortError') {
-            return
+          return
         }
 
         if (err instanceof Error) {
@@ -32,20 +33,29 @@ function App() {
         }
       })
 
-      return () => {
-        controller.abort()
-      }
-    }, [])
-
-
-    if (loading) {
-        return <p>Cargando países...</p>
+    return () => {
+      controller.abort()
     }
-    if (error) {
-        return <p>Error: {error}</p>
-    }
+  }, [])
 
-    return <ListaPaises countries={countries} />
+
+  if (loading) {
+    return (
+      <EstadoMensajes type="Loading" mensaje="Cargando países..." />
+    )
+  }
+  if (error) {
+    return (
+      <EstadoMensajes type="Error" mensaje={error} />
+    )
+  }
+  if (countries.length === 0) {
+    return (
+     <EstadoMensajes type="Empty" mensaje="No se encontraron países." />
+    )
+  }
+
+  return <ListaPaises countries={countries} />
 }
 
 export default App;
