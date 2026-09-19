@@ -12,3 +12,29 @@
     object-fit: contain;
     border-radius: 8px;
 }
+
+.country-card button {
+    padding: 0.75rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+
+    background-color: #315de5;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.country-card button:hover {
+    background-color: #244ac0;
+    transform: translateY(-1px);
+}
+
+.country-card button:focus-visible {
+    outline: 3px solid #93b4ff;
+    outline-offset: 3px;
+}

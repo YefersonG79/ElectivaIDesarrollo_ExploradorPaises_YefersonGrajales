@@ -1,0 +1,95 @@
+.country-detail {
+    width: calc(100% - 2rem);
+    max-width: 850px;
+    margin: 2.5rem auto;
+    padding: 2rem;
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.country-detail h1 {
+    margin: 1.5rem 0;
+    font-size: 2rem;
+    color: #222;
+    text-align: center;
+}
+
+.country-detail img {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: 190px;
+    margin: 1.5rem auto;
+
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+}
+
+.country-detail p {
+    margin: 0;
+    padding: 0.85rem 0;
+    color: #444;
+    line-height: 1.6;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.country-detail p strong {
+    color: #222;
+}
+
+/* Botón para regresar */
+
+.country-detail button {
+    padding: 0.75rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+
+    background-color: #315de5;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.country-detail button:hover {
+    background-color: #244ac0;
+    transform: translateY(-1px);
+}
+
+.country-detail button:focus-visible {
+    outline: 3px solid #93b4ff;
+    outline-offset: 3px;
+}
+
+/* Pantallas pequeñas */
+
+@media (max-width: 600px) {
+    .country-detail {
+        margin: 1rem auto;
+        padding: 1.25rem;
+    }
+
+    .country-detail h1 {
+        font-size: 1.6rem;
+    }
+
+    .country-detail img {
+        height: 150px;
+    }
+
+    .country-detail p {
+        overflow-wrap: anywhere;
+    }
+
+    .country-detail button {
+        width: 100%;
+    }
+}
