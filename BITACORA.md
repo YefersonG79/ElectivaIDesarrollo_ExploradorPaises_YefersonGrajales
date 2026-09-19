@@ -46,3 +46,23 @@ Se utiliza Countries.dev como alternativa pública sin autenticación.
 
 **Commits relacionados:**
 - `feat: added countries listing interface`
+
+## 18/09/2026
+
+**Trabajo realizado:**
+- Creación de la rama `feature/rf02-estados`.
+- Implementación del componente `EstadoMensajes`.
+- Implementación de los estados de cargando, error, sin resultados y éxito.
+- Pruebas manuales de cada estado.
+- Validación mediante `npm run lint`.
+- Validación mediante `npm run build`.
+- Integración de RF-02 en `develop`.
+
+**Pruebas realizadas:**
+- Estado cargando: correcto.
+- Estado error: correcto.
+- Estado sin resultados: correcto.
+- Estado éxito: correcto.
+
+**Commit relacionado:**
+- `feat: added interface states`
