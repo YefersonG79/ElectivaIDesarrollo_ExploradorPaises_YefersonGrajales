@@ -11,14 +11,10 @@ function App() {
   const [countries, setCountries] = useState<Country[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   const [searchTerm, setSearchTerm] = useState('')
   const [debounceSearch, setDebounceSearch] = useState('')
-
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
-
   const [retryCount, setRetryCount] = useState(0)
-
   const [favoriteCodes, setFavoriteCodes] = useState<string[]>(() => {
     const stored = localStorage.getItem('favoriteCodes')
 
@@ -32,25 +28,25 @@ function App() {
         return parsed as string[]
       }
       return []
-    } catch  {
+    } catch {
       return []
-      }
-    })
+    }
+  })
 
   function toggleFavorite(code: string) {
-  setFavoriteCodes((prev) => {
-    if (prev.includes(code)) {
-      return prev.filter((favoriteCode) => favoriteCode !== code)
-    }
-    return [...prev, code]
-  })
-}
+    setFavoriteCodes((prev) => {
+      if (prev.includes(code)) {
+        return prev.filter((favoriteCode) => favoriteCode !== code)
+      }
+      return [...prev, code]
+    })
+  }
 
-function handleRetry() {
+  function handleRetry() {
     setError(null)
     setLoading(true)
     setRetryCount((prev) => prev + 1)
-}
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -93,10 +89,10 @@ function handleRetry() {
 
   useEffect(() => {
     localStorage.setItem(
-        'favoriteCodes',
-        JSON.stringify(favoriteCodes)
+      'favoriteCodes',
+      JSON.stringify(favoriteCodes)
     )
-}, [favoriteCodes])
+  }, [favoriteCodes])
 
   const filteredCountries = countries.filter((country) => {
     const countryName = country.name.toLowerCase()
@@ -111,10 +107,10 @@ function handleRetry() {
   }
   if (error) {
     return (
-      <EstadoMensajes 
-      type="Error" 
-      mensaje={error}
-      onRetry={handleRetry}
+      <EstadoMensajes
+        type="Error"
+        mensaje={error}
+        onRetry={handleRetry}
       />
     )
   }
@@ -147,7 +143,7 @@ function handleRetry() {
           onSelectCountry={setSelectedCountry}
           favoriteCodes={favoriteCodes}
           onToggleFavorite={toggleFavorite}
-          />
+        />
       )}
     </>
   )
