@@ -66,3 +66,31 @@ Se utiliza Countries.dev como alternativa pública sin autenticación.
 
 **Commit relacionado:**
 - `feat: added interface states`
+
+## 19/09/2026
+
+**Trabajo realizado:**
+- Creación de la rama `feature/rf03-busqueda`.
+- Implementación del componente `BarraBusqueda`.
+- Implementación de input controlado.
+- Implementación de búsqueda con retardo de 400 ms.
+- Uso de `setTimeout` dentro de `useEffect`.
+- Limpieza del temporizador mediante `clearTimeout`.
+- Implementación de búsqueda sin distinción entre mayúsculas y minúsculas.
+- Manejo del estado sin resultados.
+- Ajuste responsive de las tarjetas durante búsquedas con pocos resultados.
+- Ajuste de las imágenes de banderas para conservar su proporción.
+- Validación mediante `npm run lint`.
+- Validación mediante `npm run build`.
+- Integración de RF-03 en `develop`.
+
+**Pruebas realizadas:**
+- Búsqueda con nombre completo: correcta.
+- Búsqueda parcial: correcta.
+- Búsqueda con mayúsculas y minúsculas: correcta.
+- Búsqueda sin coincidencias: correcta.
+- Borrado del término de búsqueda: correcto.
+- Retardo de 400 ms: correcto.
+
+**Commit relacionado:**
+- `feat: added debounced country search`
