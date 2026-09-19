@@ -1,40 +1,64 @@
 .country-card {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-
+    display: flex;
+    flex-direction: column;
 }
-.country-card img {
+
+.country-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.country-actions button {
     width: 100%;
-    height: 160px;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.country-card button {
-    padding: 0.75rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-
-    background-color: #315de5;
-    color: #ffffff;
-    font-size: 0.95rem;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    box-sizing: border-box;
+    border-radius: 9px;
+    font-size: 0.9rem;
     font-weight: 600;
-
     cursor: pointer;
     transition:
         background-color 0.2s ease,
         transform 0.2s ease;
 }
 
-.country-card button:hover {
-    background-color: #244ac0;
-    transform: translateY(-1px);
+
+.country-actions .details-button {
+    background-color: #eef2ff;
+    color: #315de5;
+    border: 1px solid #ccd8ff;
 }
 
-.country-card button:focus-visible {
+.country-actions .details-button:hover {
+    background-color: #dce5ff;
+}
+
+
+.country-actions .favorite-button {
+    background-color: #315de5;
+    color: #ffffff;
+    border: 1px solid #315de5;
+}
+
+.country-actions .favorite-button:hover {
+    background-color: #244ac0;
+}
+
+
+.country-actions .favorite-button.is-favorite {
+    background-color: #fff8e3;
+    color: #805e00;
+    border: 1px solid #ebc65b;
+}
+
+.country-actions .favorite-button.is-favorite:hover {
+    background-color: #ffedb3;
+}
+
+.country-actions button:focus-visible {
     outline: 3px solid #93b4ff;
     outline-offset: 3px;
 }

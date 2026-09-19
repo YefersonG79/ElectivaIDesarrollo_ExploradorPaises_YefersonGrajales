@@ -4,9 +4,11 @@ import '../styles/tarjeta-pais.css'
 interface TarjetaPaisProps {
     country: Country
     onSelect: (country: Country) => void
+    isFavorite: boolean
+    onToggleFavorite: (code: string) => void
 }
 
-export function TarjetaPais({ country, onSelect }: TarjetaPaisProps) {
+export function TarjetaPais({ country, onSelect, isFavorite, onToggleFavorite }: TarjetaPaisProps) {
     return (
         <article className="country-card">
             <img
@@ -17,9 +19,24 @@ export function TarjetaPais({ country, onSelect }: TarjetaPaisProps) {
             <p><strong>Capital:</strong> {country.capital}</p>
             <p><strong>Región:</strong> {country.region}</p>
             <p><strong>Población:</strong> {country.population.toLocaleString()}</p>
-            <button type="button" onClick={() => onSelect(country)}>
-                Ver detalles
-            </button>
+            <div className="country-actions">
+                <button
+                    type="button"
+                    className="details-button"
+                    onClick={() => onSelect(country)}
+                >
+                    Ver detalles
+                </button>
+
+                <button
+                    type="button"
+                    className={`favorite-button ${isFavorite ? 'is-favorite' : ''}`}
+                    onClick={() => onToggleFavorite(country.alpha2Code)}
+                    aria-pressed={isFavorite}
+                >
+                    {isFavorite ? '★ Quitar de favoritos' : '☆ Añadir a favoritos'}
+                </button>
+            </div>
         </article>
     )
 }

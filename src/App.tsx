@@ -5,6 +5,7 @@ import { ListaPaises } from './components/ListaPaises'
 import { EstadoMensajes } from './components/EstadoMensajes'
 import { BarraBusqueda } from './components/BarraBusqueda'
 import { DetallePais } from './components/DetallePais'
+import { ContadorFavoritos } from './components/contadorFavoritos'
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([])
@@ -15,6 +16,33 @@ function App() {
   const [debounceSearch, setDebounceSearch] = useState('')
 
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
+
+  const [favoriteCodes, setFavoriteCodes] = useState<string[]>(() => {
+    const stored = localStorage.getItem('favoriteCodes')
+
+    if (!stored) {
+      return []
+    }
+    try {
+      const parsed: unknown = JSON.parse(stored)
+
+      if (Array.isArray(parsed) && parsed.every((code) => typeof code === 'string')) {
+        return parsed as string[]
+      }
+      return []
+    } catch  {
+      return []
+      }
+    })
+
+  function toggleFavorite(code: string) {
+  setFavoriteCodes((prev) => {
+    if (prev.includes(code)) {
+      return prev.filter((favoriteCode) => favoriteCode !== code)
+    }
+    return [...prev, code]
+  })
+}
 
   useEffect(() => {
     const controller = new AbortController()
@@ -55,6 +83,13 @@ function App() {
     }
   }, [searchTerm])
 
+  useEffect(() => {
+    localStorage.setItem(
+        'favoriteCodes',
+        JSON.stringify(favoriteCodes)
+    )
+}, [favoriteCodes])
+
   const filteredCountries = countries.filter((country) => {
     const countryName = country.name.toLowerCase()
     const search = debounceSearch.toLowerCase().trim()
@@ -87,6 +122,8 @@ function App() {
         onChange={setSearchTerm}
       />
 
+      <ContadorFavoritos total={favoriteCodes.length} />
+
       {filteredCountries.length === 0 ? (
         <EstadoMensajes
           type="Empty"
@@ -95,10 +132,15 @@ function App() {
       ) : (
         <ListaPaises
           countries={filteredCountries}
-          onSelectCountry={setSelectedCountry} />
+          onSelectCountry={setSelectedCountry}
+          favoriteCodes={favoriteCodes}
+          onToggleFavorite={toggleFavorite}
+          />
       )}
     </>
   )
 }
+
+
 
 export default App;
