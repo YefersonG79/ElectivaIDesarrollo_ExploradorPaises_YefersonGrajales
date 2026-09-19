@@ -94,3 +94,18 @@ Se utiliza Countries.dev como alternativa pública sin autenticación.
 
 **Commit relacionado:**
 - `feat: added debounced country search`
+
+### RF-04: Detalle de país
+
+**Trabajo realizado:**
+- Creación de la rama `feature/rf04-detalle`.
+- Implementación de la selección de países desde las tarjetas.
+- Creación del componente `DetallePais` y sus estilos.
+- Visualización de información adicional del país seleccionado.
+- Implementación del botón para regresar al listado.
+- Validación del funcionamiento y del diseño responsive.
+- Ejecución satisfactoria de `npm run lint` y `npm run build`.
+- Integración de RF-04 en `develop`.
+
+**Commit relacionado:**
+- `feat: added country detail view`
