@@ -109,3 +109,38 @@ Se utiliza Countries.dev como alternativa pública sin autenticación.
 
 **Commit relacionado:**
 - `feat: added country detail view`
+
+
+### RF-05: Favoritos con persistencia
+
+**Trabajo realizado:**
+- Creación de la rama `feature/rf05-favoritos`.
+- Implementación del componente `ContadorFavoritos`.
+- Creación del estado `favoriteCodes` para almacenar los códigos de los países favoritos.
+- Implementación de la función `toggleFavorite` para agregar y quitar países de favoritos.
+- Incorporación del botón de favoritos en `TarjetaPais` y conexión de sus propiedades mediante `ListaPaises`.
+- Implementación de la lectura y escritura de favoritos mediante `localStorage`.
+- Ajuste visual del contador y de los botones de las tarjetas.
+- Validación satisfactoria mediante `npm run lint` y `npm run build`.
+
+**Dificultades encontradas:**
+- Se presentó un error de TypeScript al intentar utilizar `favoriteCodes` dentro de su propia inicialización.
+- Durante las primeras pruebas, el contador se reiniciaba al recargar la página.
+- Los botones de las tarjetas aparecían desalineados y con tamaños diferentes.
+
+**Soluciones aplicadas:**
+- Se corrigió la inicialización del estado mediante la lectura de `localStorage`.
+- Se separó la recuperación de los favoritos de su escritura mediante un `useEffect`.
+- Se corrigió la escritura del almacenamiento y se comprobó la persistencia después de recargar.
+- Se organizaron los botones mediante CSS para mantener una presentación uniforme.
+
+**Pruebas realizadas:**
+- Agregar países a favoritos: correcto.
+- Quitar países de favoritos: correcto.
+- Actualización del contador: correcto.
+- Conservación de favoritos después de recargar: correcto.
+- Cambio del texto del botón según el estado de favorito: correcto.
+- Compilación y análisis estático en la rama de funcionalidad: correctos.
+
+**Commit relacionado:**
+- `feat: added persistent country favorites`
