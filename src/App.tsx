@@ -17,6 +17,8 @@ function App() {
 
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
 
+  const [retryCount, setRetryCount] = useState(0)
+
   const [favoriteCodes, setFavoriteCodes] = useState<string[]>(() => {
     const stored = localStorage.getItem('favoriteCodes')
 
@@ -44,6 +46,12 @@ function App() {
   })
 }
 
+function handleRetry() {
+    setError(null)
+    setLoading(true)
+    setRetryCount((prev) => prev + 1)
+}
+
   useEffect(() => {
     const controller = new AbortController()
 
@@ -52,7 +60,7 @@ function App() {
         setCountries(data)
       })
       .catch((err: unknown) => {
-        if (err instanceof DOMException && err.name === 'AbortError') {
+        if (controller.signal.aborted) {
           return
         }
 
@@ -71,7 +79,7 @@ function App() {
     return () => {
       controller.abort()
     }
-  }, [])
+  }, [retryCount])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -103,7 +111,11 @@ function App() {
   }
   if (error) {
     return (
-      <EstadoMensajes type="Error" mensaje={error} />
+      <EstadoMensajes 
+      type="Error" 
+      mensaje={error}
+      onRetry={handleRetry}
+      />
     )
   }
   if (selectedCountry) {
