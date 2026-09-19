@@ -144,3 +144,33 @@ Se utiliza Countries.dev como alternativa pública sin autenticación.
 
 **Commit relacionado:**
 - `feat: added persistent country favorites`
+
+
+### RF-06: Reintento de petición
+
+**Trabajo realizado:**
+- Creación de la rama `feature/rf06-reintento`.
+- Incorporación del botón «Intentar nuevamente» en el estado de error.
+- Implementación de `handleRetry` para limpiar el error y activar el estado de carga.
+- Incorporación de `retryCount` como dependencia del efecto que consulta Countries.dev.
+- Conservación del uso de `AbortController` para cancelar peticiones.
+- Integración de RF-06 en `develop`.
+
+**Dificultades encontradas:**
+- Al simular una desconexión con DevTools en modo Offline, Chrome mostraba su propia página de error.
+- Durante las pruebas, la caché del navegador permitía que algunas peticiones finalizaran correctamente.
+
+**Soluciones aplicadas:**
+- Se verificó el estado de error mediante una modificación temporal del endpoint.
+- Se utilizó Request blocking de DevTools para bloquear únicamente la solicitud a Countries.dev.
+- Se desactivó el bloqueo y se comprobó la recuperación del listado sin recargar la página.
+
+**Pruebas realizadas:**
+- Visualización del estado de error: correcta.
+- Aparición del botón «Intentar nuevamente»: correcta.
+- Ejecución de una nueva petición: correcta.
+- Recuperación del listado sin recargar: correcta.
+- Ejecución de `npm run lint` y `npm run build` en la rama de funcionalidad y en `develop`: correcta.
+
+**Commit relacionado:**
+- `feat: added request retry on error`
