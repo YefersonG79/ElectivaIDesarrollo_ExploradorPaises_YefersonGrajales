@@ -3,11 +3,15 @@ import type { Country } from './types/api'
 import { getCountries } from './services/api'
 import { ListaPaises } from './components/ListaPaises'
 import { EstadoMensajes } from './components/EstadoMensajes'
+import { BarraBusqueda } from './components/BarraBusqueda'
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const [debounceSearch, setDebounceSearch] = useState('')
 
   useEffect(() => {
     const controller = new AbortController()
@@ -38,6 +42,21 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebounceSearch(searchTerm)
+    }, 400)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [searchTerm])
+
+  const filteredCountries = countries.filter((country) => {
+    const countryName = country.name.toLowerCase()
+    const search = debounceSearch.toLowerCase().trim()
+    return countryName.includes(search)
+  })
 
   if (loading) {
     return (
@@ -49,13 +68,24 @@ function App() {
       <EstadoMensajes type="Error" mensaje={error} />
     )
   }
-  if (countries.length === 0) {
-    return (
-     <EstadoMensajes type="Empty" mensaje="No se encontraron países." />
-    )
-  }
 
-  return <ListaPaises countries={countries} />
+return (
+  <>
+    <BarraBusqueda
+      value={searchTerm}
+      onChange={setSearchTerm}
+    />
+
+    {filteredCountries.length === 0 ? (
+      <EstadoMensajes
+        type="Empty"
+        mensaje="No se encontraron países."
+      />
+    ) : (
+      <ListaPaises countries={filteredCountries} />
+    )}
+  </>
+)
 }
 
 export default App;
